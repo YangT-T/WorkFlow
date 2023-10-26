@@ -1,11 +1,11 @@
-package controller;
+package com.workflow.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class FlowController {
-    @GetMapping("/flow/getAll")
-    public
+//    @GetMapping("/flow/getAll")
+//    public
 
 }
