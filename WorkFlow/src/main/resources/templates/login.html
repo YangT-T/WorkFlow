@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>后台登录</title>
+  <link rel="stylesheet" type="text/css" href="/css/webbase.css" />
+  <link rel="stylesheet" type="text/css" href="/css/pages-login-manage.css" />
+</head>
+<body>
+<div class="loginmanage" id="app">
+  <div class="py-container">
+    <h4 class="manage-title">login</h4>
+    <div class="loginform">
+      <div class="tab-content tab-wraped">
+        <div id="profile" class="tab-pane  active">
+
+            <div class="input-prepend">
+              <!--<span class="add-on loginname"></span>-->
+              <input type="text" placeholder="请输入ID" class="span2 input-xfat" v-model="userId">
+            </div>
+            <div class="input-prepend">
+              <!--<span class="add-on loginpwd"></span>-->
+              <input type="password" placeholder="请输入密码" class="span2 input-xfat" v-model="password">
+            </div>
+            <div class="logined">
+              <button class="sui-btn btn-block btn-xlarge btn-danger" @click="login();" target="_blank">登录</button>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+</body>
+</html>
+<!--vue和axios引入-->
+<script src="/js/vuejs-2.5.16.js"></script>
+<script src="/js/axios-0.18.0.js"></script>
+<script src="/js/login.js"></script>
