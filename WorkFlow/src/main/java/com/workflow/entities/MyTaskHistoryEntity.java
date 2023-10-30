@@ -7,10 +7,10 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class TaskEntity {
+public class MyTaskHistoryEntity {
     String Id;
-    String name;
-    String owner;
+    Date startTime;
+    Date endTime;
     String assignee;
-    Date createTime;
+    String activityName ;
 }

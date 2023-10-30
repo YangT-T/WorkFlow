@@ -1,6 +1,6 @@
 package com.workflow.service;
 
-import com.workflow.entities.TaskEntity;
+import com.workflow.entities.MyTaskEntity;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.TaskService;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class MyTaskService {
     ProcessEngine processEngine;
-    public List<TaskEntity> getAll(String assigneeKey){
+    public List<MyTaskEntity> getAll(String assigneeKey){
         processEngine= ProcessEngines.getDefaultProcessEngine();
         org.activiti.engine.TaskService taskService = processEngine.getTaskService();
         System.out.println(assigneeKey);
@@ -20,15 +20,15 @@ public class MyTaskService {
                 .taskAssignee(assigneeKey)
                 .list();
         System.out.println(taskList.size());
-        ArrayList<TaskEntity> entityList=new ArrayList<>();
+        ArrayList<MyTaskEntity> entityList=new ArrayList<>();
         taskList.forEach(e->{
-            entityList.add(new TaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),e.getCreateTime()));
+            entityList.add(new MyTaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),e.getDescription(),e.getCreateTime(),e.getDueDate()));
         });
         System.out.println("getAll");
         return entityList;
     }
 
-    public List<TaskEntity> getAllByProcess(String processKey, String assigneeKey){
+    public List<MyTaskEntity> getAllByProcess(String processKey, String assigneeKey){
         processEngine= ProcessEngines.getDefaultProcessEngine();
         org.activiti.engine.TaskService taskService = processEngine.getTaskService();
         List<Task> taskList = taskService.createTaskQuery()
@@ -36,9 +36,9 @@ public class MyTaskService {
                 .taskAssignee(assigneeKey)
                 .list();
         System.out.println(taskList.size());
-        ArrayList<TaskEntity> entityList=new ArrayList<>();
+        ArrayList<MyTaskEntity> entityList=new ArrayList<>();
         taskList.forEach(e->{
-            entityList.add(new TaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),e.getCreateTime()));
+            entityList.add(new MyTaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),e.getDescription(),e.getCreateTime(),e.getDueDate()));
         });
         System.out.println("getAllByProcess");
         return entityList;

@@ -1,7 +1,7 @@
 package com.workflow.controller;
 
-import com.workflow.entities.TaskEntity;
-import com.workflow.entities.TaskHistoryEntity;
+import com.workflow.entities.MyTaskEntity;
+import com.workflow.entities.MyTaskHistoryEntity;
 import com.workflow.service.MyHistoryService;
 import com.workflow.service.MyTaskService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,28 +19,29 @@ public class TaskController {
 @Autowired
     private MyHistoryService myHistoryService;
     @GetMapping("/task/getAll")
-    public List<TaskEntity> getAll(HttpServletRequest request){
+    public List<MyTaskEntity> getAll(HttpServletRequest request){
         String assigneeKey = (String)request.getSession().getAttribute("id");
         return myTaskService.getAll(assigneeKey);
     }
 
     @GetMapping("/task/getAllByProcess")
-    public List<TaskEntity> getAllByProcess(HttpServletRequest request,
-                                   @RequestParam(value = "processKey", defaultValue = "test1") String processKey,
-                                   @RequestParam(value = "assigneeKey", defaultValue = "Jack") String assigneeKey){
+    public List<MyTaskEntity> getAllByProcess(HttpServletRequest request,
+                                              @RequestParam(value = "processKey", defaultValue = "test1") String processKey,
+                                              @RequestParam(value = "assigneeKey", defaultValue = "Jack") String assigneeKey){
         assigneeKey = (String)request.getSession().getAttribute("id");
         System.out.println(processKey);
         System.out.println(assigneeKey);
         return myTaskService.getAll(assigneeKey);
     }
 
-    @GetMapping("/task/complete")
+    @GetMapping("/task/completeTask")
     public void complete(@RequestParam(value="taskId")String taskId){
+        System.out.println(taskId);
         myTaskService.completeTask(taskId);
     }
 
     @GetMapping("/task/getHistory")
-    public List<TaskHistoryEntity> getHistory(HttpServletRequest request){
+    public List<MyTaskHistoryEntity> getHistory(HttpServletRequest request){
         String id=(String)request.getSession().getAttribute("id");
         return myHistoryService.getHistory(id);
     }

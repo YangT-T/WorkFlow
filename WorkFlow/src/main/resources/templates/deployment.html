@@ -31,34 +31,24 @@
 			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 			                      <thead>
 			                          <tr>
-										  <th class="sorting_asc">流程名称</th>
-										  <th class="sorting_asc">流程Key</th>
-										  <th class="sorting_asc">文件路径</th>
+										  <th class="sorting_asc">id</th>
+										  <th class="sorting_asc">name</th>
+										  <th class="sorting_asc">description</th>
 										  <th class="sorting_asc">状态</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
 			                      <tbody>
 
-									  <tr v-for="flow in flowList">
-										  <td>{{flow.flowname}}</td>
-										  <td>{{flow.flowkey}}</td>
-										  <td>{{flow.filepath}}</td>
-										  <td>{{flow.state==0?"已部署":"未部署"}}</td>
+									  <tr v-for="deployment in deploymentList">
+										  <td>{{deployment.id}}</td>
+										  <td>{{deployment.name}}</td>
+										  <td>{{deployment.description}}</td>
+										  <td>{{deployment.suspended==0?"启用":"禁用"}}</td>
 										  <td class="text-center">
-											  <button type="button" class="btn bg-olive btn-xs" @click="deploy(flow.id);">部署</button>
+											  <button type="button" class="btn bg-olive btn-xs" @click="createInstance(deployment.id);">创建流程实例</button>
 										  </td>
 									  </tr>
-			                          <!--<tr v-for="flow in flowList">
-				                          <td>{{flow.flowname}}</td>
-				                          <td>{{flow.flowkey}}</td>
-				                          <td>{{flow.filepath}}</td>
-				                          <td></td>
-				                          <td>{{flow.createtime}}</td>
-		                                  <td class="text-center">
-		                                 	  <button type="button" class="btn bg-olive btn-xs" @click="deploy();">部署</button>
-		                                  </td>
-			                          </tr>-->
 
 			                      </tbody>
 			                  </table>

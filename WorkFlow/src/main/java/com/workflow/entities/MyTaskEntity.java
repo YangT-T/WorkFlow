@@ -2,16 +2,17 @@ package com.workflow.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
-public class TaskHistoryEntity {
+public class MyTaskEntity {
     String Id;
-    Date startTime;
-    Date endTime;
+    String name;
+    String owner;
     String assignee;
-    String activityName ;
+    String description;
+    Date createTime;
+    Date dueDate;
 }

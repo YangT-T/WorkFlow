@@ -15,8 +15,8 @@ var app = new Vue({
                     app.tasklist = result.data;
                 });
         },
-        doTask:function (taskId) {
-            axios.put('/flow/completeTask/'+taskId)
+        completeTask:function (taskId) {
+            axios.get('/task/completeTask?taskId='+taskId)
                 .then(function(result){
                     console.log(result);
                     app.tasklist = result.data;
