@@ -7,24 +7,26 @@ import com.workflow.service.MyTaskService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class TaskController {
+@RequestMapping("/task")
+public class TaskRestController {
 @Autowired
     private MyTaskService myTaskService;
 @Autowired
     private MyHistoryService myHistoryService;
-    @GetMapping("/task/getAll")
+    @GetMapping("/getAll")
     public List<MyTaskEntity> getAll(HttpServletRequest request){
         String assigneeKey = (String)request.getSession().getAttribute("id");
         return myTaskService.getAll(assigneeKey);
     }
 
-    @GetMapping("/task/getAllByProcess")
+    @GetMapping("/getAllByProcess")
     public List<MyTaskEntity> getAllByProcess(HttpServletRequest request,
                                               @RequestParam(value = "processKey", defaultValue = "test1") String processKey,
                                               @RequestParam(value = "assigneeKey", defaultValue = "Jack") String assigneeKey){
@@ -34,13 +36,13 @@ public class TaskController {
         return myTaskService.getAll(assigneeKey);
     }
 
-    @GetMapping("/task/completeTask")
+    @GetMapping("/completeTask")
     public void complete(@RequestParam(value="taskId")String taskId){
         System.out.println(taskId);
         myTaskService.completeTask(taskId);
     }
 
-    @GetMapping("/task/getHistory")
+    @GetMapping("/getHistory")
     public List<MyTaskHistoryEntity> getHistory(HttpServletRequest request){
         String id=(String)request.getSession().getAttribute("id");
         return myHistoryService.getHistory(id);

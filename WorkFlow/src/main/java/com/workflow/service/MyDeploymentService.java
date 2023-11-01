@@ -16,11 +16,16 @@ import java.util.List;
 public class MyDeploymentService {
     public List<MyDeploymentEntity> getAllDeploymentService(){
         RepositoryService repositoryService = ProcessEngines.getDefaultProcessEngine().getRepositoryService();
-        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
+//        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().list();
         List<MyDeploymentEntity> myList=new ArrayList<>();
+        List<Deployment> list = repositoryService.createDeploymentQuery().list();
+//        list.forEach(e->{
+//            System.out.println(e.getId());
+//            myList.add(new MyDeploymentEntity(e.getId(),e.getName(),e.getDescription(),e.isSuspended()));
+//        });
         list.forEach(e->{
             System.out.println(e.getId());
-            myList.add(new MyDeploymentEntity(e.getId(),e.getName(),e.getDescription(),e.isSuspended()));
+            myList.add(new MyDeploymentEntity(e.getId(),e.getName(),e.getCategory(),false));
         });
         return myList;
     }

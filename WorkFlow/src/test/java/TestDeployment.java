@@ -24,10 +24,25 @@ public class TestDeployment {
     }
 
     @Test
+    public void testDeploymentMapFile(){
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
+        Deployment deploy = repositoryService.createDeployment().name("入党申请")
+                .addClasspathResource("bpmn/mapTest.bpmn20.xml")
+                .deploy();
+        System.out.println(deploy.getName());
+    }
+
+    @Test
     public void getAllDeployment(){
         RepositoryService repositoryService = ProcessEngines.getDefaultProcessEngine().getRepositoryService();
         RuntimeService runtimeService1 = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
 
         List<Deployment> list = repositoryService.createDeploymentQuery().list();
+    }
+
+    @Test
+    public void testDeployThroughMap(){
+        RepositoryService repositoryService = ProcessEngines.getDefaultProcessEngine().getRepositoryService();
     }
 }

@@ -7,8 +7,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/process")
 public class ProcessController {
-//    @GetMapping("/getAll")
-//    public
-
-
 }

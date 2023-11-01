@@ -1,4 +1,4 @@
-package com.workflow.controller;
+package com.workflow.controller.modelController;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,4 @@ public class HistoryController {
     public String history(HttpServletRequest request){
         return "redirect:/historyPage";
     }
-
-
 }
