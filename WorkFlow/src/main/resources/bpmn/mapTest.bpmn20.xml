@@ -6,6 +6,8 @@
     <userTask id="sid-12d99b06-c5b9-4705-aa1d-8e2ae97ea499" activiti:assignee="${student}" name="提交入党申请">
       <extensionElements>
         <activiti:formProperty id="${wordCount}"/>
+        <activiti:executionListener class="Class 1"/>
+        <activiti:executionListener class="Class 2"/>
       </extensionElements>
     </userTask>
     <endEvent id="sid-1d1cf46b-611c-4903-82d8-2dce97afe358"/>

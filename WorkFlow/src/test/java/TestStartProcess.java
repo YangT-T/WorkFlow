@@ -1,3 +1,4 @@
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Model;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -33,8 +34,10 @@ public class TestStartProcess {
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
         System.out.println(repositoryService.getDeploymentResourceNames("mapTest"));
 //        Model mapTest = repositoryService.getModel("mapTest");
-        System.out.println(repositoryService.getDeploymentResourceNames("mapTest"));
-//        System.out.println(mapTest.getKey());
-        System.out.println(repositoryService.getProcessDefinition("mapTest:1:27503").getKey());
+        DynamicBpmnService dynamicBpmnService = defaultProcessEngine.getDynamicBpmnService();
+//        dynamicBpmnService.get
+//        defaultProcessEngine.get
+        defaultProcessEngine.getIdentityService();
+//        System.out.println(mapTest.getDataStores());
     }
 }
