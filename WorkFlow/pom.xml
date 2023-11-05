@@ -37,6 +37,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.activiti/activiti5-compatibility -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti5-compatibility</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.activiti/activiti-spring -->
         <dependency>
             <groupId>org.activiti</groupId>

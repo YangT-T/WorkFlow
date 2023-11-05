@@ -20,6 +20,7 @@ var app = new Vue({
                 .then(function(result){
                     console.log(result);
                     app.tasklist = result.data;
+                    this.findAll();
                 });
         },
         getHistory:function (){

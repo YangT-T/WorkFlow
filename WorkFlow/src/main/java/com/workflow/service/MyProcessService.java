@@ -15,12 +15,13 @@ import java.util.List;
 public class MyProcessService {
     RuntimeService runtimeService;
 
-//    public List<ProcessEntity> getDeployment(){
-//        RepositoryService repositoryService = ProcessEngines.getDefaultProcessEngine().getRepositoryService();
-////        repositoryService.getn
-//    }
+    public void startInstance(String id){
+        RuntimeService runtimeService = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
+        ProcessInstance processInstance = runtimeService.startProcessInstanceById(id);
+        System.out.println(processInstance.getId());
+    }
 
-    public void startProcessById(String processId){
+    public void startProcessWithMap(String processId){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
         ProcessInstance test1 = runtimeService.startProcessInstanceByKey(processId);

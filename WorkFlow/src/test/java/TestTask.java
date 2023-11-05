@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 public class TestTask {
     @Test
     public void testComplete(){
-        new MyTaskService().completeTask("2505");
+        new MyTaskService().completeTask("1");
     }
 
 }

@@ -39,6 +39,7 @@ public class TestDeployment {
         RuntimeService runtimeService1 = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
 
         List<Deployment> list = repositoryService.createDeploymentQuery().list();
+        System.out.println(list.size());
     }
 
     @Test

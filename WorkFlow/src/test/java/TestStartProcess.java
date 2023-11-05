@@ -37,7 +37,7 @@ public class TestStartProcess {
         DynamicBpmnService dynamicBpmnService = defaultProcessEngine.getDynamicBpmnService();
 //        dynamicBpmnService.get
 //        defaultProcessEngine.get
-        defaultProcessEngine.getIdentityService();
+//        defaultProcessEngine.getIdentityService();
 //        System.out.println(mapTest.getDataStores());
     }
 }
