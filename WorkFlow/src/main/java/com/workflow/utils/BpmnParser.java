@@ -18,13 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BpmnParser {
-    public static List<String> parseBpmnAssignee(String deploymentId,String fileName) {
+    public static List<String> parseBpmnAssignee(String deploymentId) {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         List<ProcessDefinition> list = processEngine.getRepositoryService().createProcessDefinitionQuery().
                 orderByProcessDefinitionVersion().asc().
                 deploymentId(deploymentId).list();
         ProcessDefinition processDefinition = list.get(0);
+        String fileName=processDefinition.getDiagramResourceName();
         List<String> result = new ArrayList<>();
         try {
             InputStream processBpmn = processEngine.getRepositoryService().getResourceAsStream(processDefinition.getDeploymentId(), fileName);

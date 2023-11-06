@@ -29,79 +29,43 @@ public class DeployProcess {
     private String deploymentName="deployment_2";
     private String bpmnPath="bpmn/test.bpmn20.xml";
     private String jpgPath="bpmn-png/test1";
+
+    private String deploymentId="20001";
     @Test
-    public void Deploy(){
+    public void deploy(){
+        // 在后端部署流程
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
         Deployment deploy = repositoryService.createDeployment().name(deploymentName)
                 .addClasspathResource(bpmnPath)
                 .addClasspathResource(jpgPath)
                 .deploy();
+        deploymentId=deploy.getId();
         System.out.println(deploy.getName());
         System.out.println(deploy.getId());
         System.out.println(deploy.getKey());
     }
 
     @Test
-    public void testStart(){
-        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
-        RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
-        RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
-//        runtimeService.startProcessInstanceByKey(repository)
-//        repositoryService.setDeploymentKey();
-        ProcessDefinition processDefinition = repositoryService.getProcessDefinition("17501");
-        System.out.println(processDefinition.getKey());
-//        runtimeService
-    }
-
-    @Test
-    public void testStep1(){
-        String name="aaa";
-        String resourcePath="bpmn/mapTest.bpmn20.xml";
-        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
-        RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
-        Deployment deploy = repositoryService.createDeployment().name(name)
-                .addClasspathResource(resourcePath)
-                .deploy();
-        System.out.println(deploy.getName());
-        System.out.println(deploy.getId());
-        System.out.println(deploy.getKey());
-    }
-
-    @Test
-    public void testParse(){
-        String deploymentId="20001";
-        String fileName="bpmn/"+"mapTest"+".bpmn20.xml";
-
-        List<String> strings = BpmnParser.parseBpmnAssignee(deploymentId, fileName);
-
-    }
-
-    @Test
-    public void testStartProcess(){
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtimeService= engine.getRuntimeService();
-
-        Map<String,Object> map = new HashMap<String,Object>();
-
+    public void fillPropertyAndStart(){
+        //backend
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        List<ProcessDefinition> list = processEngine.getRepositoryService().createProcessDefinitionQuery().
+                orderByProcessDefinitionVersion().asc().
+                deploymentId(deploymentId).list();
+        ProcessDefinition processDefinition = list.get(0);
+        String processId=processDefinition.getId();
+        String resourceName = processDefinition.getResourceName();
+        System.out.println(resourceName);
+        List<String> toFill = BpmnParser.parseBpmnAssignee(deploymentId);
+        //返回前端，前端填写所有属性(以toFill里的值为键),返回一个map
+        Map<String,Object> map=new HashMap<>();
         map.put("student", "alex");
         map.put("leader", "yh");
         map.put("supervisor", "Jack");
-
+        //后端根据map启动流程
+        RuntimeService runtimeService = processEngine.getRuntimeService();
         ProcessInstance processInstance =runtimeService.startProcessInstanceByKey("mapTest",map);
-
-        System.out.println(processInstance.getId());//流程图id
+        System.out.println("start process instance id = "+processInstance.getId());
     }
-
-
-    @Test
-    public void testStep2(){
-        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
-        FormService formService = defaultProcessEngine.getFormService();
-        StartFormData startFormData = formService.getStartFormData("mapTest:2:22504");
-        List<FormProperty> formProperties = startFormData.getFormProperties();
-        System.out.println(formProperties.size());
-
-    }
-
 }
