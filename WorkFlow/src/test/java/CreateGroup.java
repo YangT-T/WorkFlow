@@ -19,10 +19,10 @@ public class CreateGroup {
         String groupId="mentor";
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         IdentityService identityService = defaultProcessEngine.getIdentityService();
-        UserQuery userQuery = identityService.createUserQuery().userId(userId);
-        System.out.println(userQuery.count());
-        GroupQuery groupQuery = identityService.createGroupQuery().groupId(groupId);
-        System.out.println(groupQuery.count());
+//        UserQuery userQuery = identityService.createUserQuery().userId(userId);
+//        System.out.println(userQuery.count());
+//        GroupQuery groupQuery = identityService.createGroupQuery().groupId(groupId);
+//        System.out.println(groupQuery.count());
 
         UserEntityImpl user = new UserEntityImpl();
         user.setId(userId);
@@ -34,10 +34,10 @@ public class CreateGroup {
         identityService.saveGroup(group);
         identityService.createMembership(userId,groupId);
 
-        userQuery = identityService.createUserQuery().userId(userId);
-        System.out.println(userQuery.count());
-        groupQuery = identityService.createGroupQuery().groupId(groupId);
-        System.out.println(groupQuery.count());
+//        userQuery = identityService.createUserQuery().userId(userId);
+//        System.out.println(userQuery.count());
+//        groupQuery = identityService.createGroupQuery().groupId(groupId);
+//        System.out.println(groupQuery.count());
 
     }
 

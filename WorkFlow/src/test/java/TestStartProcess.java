@@ -1,12 +1,14 @@
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Model;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestStartProcess {
@@ -15,6 +17,20 @@ public class TestStartProcess {
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
         ProcessInstance test1 = runtimeService.startProcessInstanceByKey("test1");
+        System.out.println(test1.getId());
+    }
+
+    @Test
+    public void startProcessById(){
+        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
+        String id="1";
+        List<ProcessDefinition> list = defaultProcessEngine.getRepositoryService().createProcessDefinitionQuery().
+                orderByProcessDefinitionVersion().asc().
+                deploymentId(id).list();
+        ProcessDefinition processDefinition = list.get(0);
+        String processId=processDefinition.getId();
+        ProcessInstance test1 = runtimeService.startProcessInstanceById(processId);
         System.out.println(test1.getId());
     }
 

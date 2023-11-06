@@ -5,6 +5,7 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,11 @@ public class MyProcessService {
 
     public void startInstance(String id){
         RuntimeService runtimeService = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
+               List<ProcessDefinition> list = ProcessEngines.getDefaultProcessEngine().getRepositoryService().createProcessDefinitionQuery().
+                orderByProcessDefinitionVersion().asc().
+                deploymentId(id).list();
+        ProcessDefinition processDefinition = list.get(0);
+        id=processDefinition.getId();
         ProcessInstance processInstance = runtimeService.startProcessInstanceById(id);
         System.out.println(processInstance.getId());
     }
