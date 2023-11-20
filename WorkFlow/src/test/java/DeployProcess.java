@@ -27,10 +27,10 @@ import java.util.Map;
 
 public class DeployProcess {
     private String deploymentName="deployment_2";
-    private String bpmnPath="bpmn/test.bpmn20.xml";
-    private String jpgPath="bpmn-png/test1";
+    private String bpmnPath="bpmn/leave.bpmn20.xml";
+    private String jpgPath="bpmn-png/";
 
-    private String deploymentId="20001";
+    private String deploymentId="15001";
     @Test
     public void deploy(){
         // 在后端部署流程
@@ -38,7 +38,7 @@ public class DeployProcess {
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
         Deployment deploy = repositoryService.createDeployment().name(deploymentName)
                 .addClasspathResource(bpmnPath)
-                .addClasspathResource(jpgPath)
+//                .addClasspathResource(jpgPath)
                 .deploy();
         deploymentId=deploy.getId();
         System.out.println(deploy.getName());
@@ -67,5 +67,20 @@ public class DeployProcess {
         RuntimeService runtimeService = processEngine.getRuntimeService();
         ProcessInstance processInstance =runtimeService.startProcessInstanceByKey("mapTest",map);
         System.out.println("start process instance id = "+processInstance.getId());
+    }
+
+    @Test
+    public void interesting(){
+        //backend
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        List<ProcessDefinition> list = processEngine.getRepositoryService().createProcessDefinitionQuery().
+                orderByProcessDefinitionVersion().asc().
+                deploymentId(deploymentId).list();
+        ProcessDefinition processDefinition = list.get(0);
+        String processId=processDefinition.getId();
+        String resourceName = processDefinition.getResourceName();
+        System.out.println(resourceName);
+        List<String> toFill = BpmnParser.parseBpmnAssignee(deploymentId);
+        System.out.println(toFill.size());
     }
 }

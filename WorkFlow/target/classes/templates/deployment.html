@@ -31,22 +31,25 @@
 			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 			                      <thead>
 			                          <tr>
-										  <th class="sorting_asc">id</th>
-										  <th class="sorting_asc">name</th>
-										  <th class="sorting_asc">description</th>
-										  <th class="sorting_asc">状态</th>
-					                      <th class="text-center">操作</th>
+										  <th class="text-center">id</th>
+										  <th class="text-center">name</th>
+										  <th class="text-center">state</th>
+										  <th class="text-center">START</th>
+					                      <th class="text-center">preview</th>
 			                          </tr>
 			                      </thead>
 			                      <tbody>
 
 									  <tr v-for="deployment in deploymentList">
-										  <td>{{deployment.id}}</td>
-										  <td>{{deployment.name}}</td>
-										  <td>{{deployment.description}}</td>
-										  <td>{{deployment.suspended==0?"启用":"禁用"}}</td>
+										  <td class="text-center">{{deployment.id}}</td>
+										  <td class="text-center">{{deployment.name}}</td>
+<!--										  <td>{{deployment.description}}</td>-->
+										  <td class="text-center">{{deployment.suspended==0?"启用":"禁用"}}</td>
 										  <td class="text-center">
-											  <button type="button" class="btn bg-olive btn-xs" @click="createInstance(deployment.id);">创建流程实例</button>
+											  <button type="button" class="btn bg-olive btn-xs" @click="fillProperty(deployment.id);">创建流程实例</button>
+										  </td>
+										  <td class="text-center">
+											  <img :src="'/deployment/deploymentShowPage?id='+deployment.id" style="width:40%;height:50%">
 										  </td>
 									  </tr>
 
@@ -59,6 +62,9 @@
                     <!-- /.box-body -->
 
 				</div>
+<!--  <img :src="'data:image/jpeg;base64,'+row.imageBlob" style="width:40%;height:50%" >-->
+
+
 </body>
 <!--vue和axios引入-->
 <script src="/js/vuejs-2.5.16.js"></script>

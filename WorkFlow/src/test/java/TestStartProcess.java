@@ -24,13 +24,16 @@ public class TestStartProcess {
     public void startProcessById(){
         ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = defaultProcessEngine.getRuntimeService();
-        String id="1";
+        String id="2501";
         List<ProcessDefinition> list = defaultProcessEngine.getRepositoryService().createProcessDefinitionQuery().
                 orderByProcessDefinitionVersion().asc().
                 deploymentId(id).list();
         ProcessDefinition processDefinition = list.get(0);
         String processId=processDefinition.getId();
-        ProcessInstance test1 = runtimeService.startProcessInstanceById(processId);
+        Map<String,Object> map = new HashMap<>();
+        map.put("employeeId","a");
+//        ProcessInstance test1 = runtimeService.startProcessInstanceById(processId);
+        ProcessInstance test1 = runtimeService.startProcessInstanceById(processId,map);
         System.out.println(test1.getId());
     }
 

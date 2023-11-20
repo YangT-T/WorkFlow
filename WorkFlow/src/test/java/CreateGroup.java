@@ -1,5 +1,6 @@
 import com.workflow.entities.MyGroupEntity;
 import com.workflow.entities.MyUserEntity;
+import com.workflow.service.MyIdentityService;
 import org.activiti.engine.IdentityService;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
@@ -15,31 +16,26 @@ import org.junit.jupiter.api.Test;
 public class CreateGroup {
     @Test
     public void testIdentity() throws InterruptedException {
-        String userId="alex";
-        String groupId="mentor";
-        ProcessEngine defaultProcessEngine = ProcessEngines.getDefaultProcessEngine();
-        IdentityService identityService = defaultProcessEngine.getIdentityService();
-//        UserQuery userQuery = identityService.createUserQuery().userId(userId);
-//        System.out.println(userQuery.count());
-//        GroupQuery groupQuery = identityService.createGroupQuery().groupId(groupId);
-//        System.out.println(groupQuery.count());
-
-        UserEntityImpl user = new UserEntityImpl();
-        user.setId(userId);
-        GroupEntityImpl group = new GroupEntityImpl();
-        group.setId(groupId);
-
-        Thread.sleep(1000);
-        identityService.saveUser(user);
-        identityService.saveGroup(group);
-        identityService.createMembership(userId,groupId);
-
-//        userQuery = identityService.createUserQuery().userId(userId);
-//        System.out.println(userQuery.count());
-//        groupQuery = identityService.createGroupQuery().groupId(groupId);
-//        System.out.println(groupQuery.count());
-
+        MyIdentityService myIdentityService = new MyIdentityService();
+        myIdentityService.createRelationship("yh","boss");
+        myIdentityService.createRelationship("aa","manager");
+        myIdentityService.createRelationship("bb","manager");
     }
+
+    @Test
+    public void nitian(){
+        IdentityService identityService = ProcessEngines.getDefaultProcessEngine().getIdentityService();
+        UserEntityImpl user = new UserEntityImpl();
+        user.setId("javaboy");
+//        user.setDisplayName("江南一点雨");
+        user.setPassword("123");
+        user.setFirstName("java");
+        user.setLastName("boy");
+        user.setEmail("javaboy@qq.com");
+        user.setRevision(0);
+        identityService.saveUser(user);
+    }
+
 
     @Test
     public void testCast(){

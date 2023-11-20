@@ -16,7 +16,10 @@ var app = new Vue({
                 });
         },
         completeTask:function (taskId) {
-            axios.get('/task/completeTask?taskId='+taskId)
+            let newWindow=window.open('/bpmnPage/taskFlow?id='+taskId,'_blank')
+        },
+        deleteTask:function (taskId) {
+            axios.get('/task/deleteTask?taskId='+taskId)
                 .then(function(result){
                     console.log(result);
                     app.tasklist = result.data;

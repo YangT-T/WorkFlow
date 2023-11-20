@@ -5,7 +5,7 @@
     <userTask id="sid-f5f100d0-f80d-44a2-92ea-b8eb86854e4c" name="fill sheet" activiti:candidateGroups="students">
       <extensionElements/>
     </userTask>
-    <userTask id="sid-70721643-dabf-43ed-960b-a98d3c945a0d" name="check" activiti:assignee="Jack"/>
+    <userTask id="sid-70721643-dabf-43ed-960b-a98d3c945a0d" name="check" activiti:assignee="${supervisor}"/>
     <endEvent id="sid-874665a6-0b75-43c7-96cb-1c71a54a380b" name="end"/>
     <sequenceFlow id="sid-2a651700-8fe3-493b-837a-c8c5200c0b91" sourceRef="sid-b5f9c92b-3227-4ae6-a0f1-5175a437c71a" targetRef="sid-f5f100d0-f80d-44a2-92ea-b8eb86854e4c"/>
     <sequenceFlow id="sid-f368a0cf-91df-45ab-bc0e-656a192445ba" sourceRef="sid-f5f100d0-f80d-44a2-92ea-b8eb86854e4c" targetRef="sid-70721643-dabf-43ed-960b-a98d3c945a0d">

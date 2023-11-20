@@ -36,6 +36,17 @@ public class MyDeploymentService {
         System.out.println(processInstance.getId());
     }
 
+    public String getJPGE(String deploymentId){
+        RepositoryService repositoryService = ProcessEngines.getDefaultProcessEngine().getRepositoryService();
+        List<ProcessDefinition> list = ProcessEngines.getDefaultProcessEngine().getRepositoryService().createProcessDefinitionQuery().
+                orderByProcessDefinitionVersion().asc().
+                deploymentId(deploymentId).list();
+        ProcessDefinition processDefinition = list.get(0);
+        String id=processDefinition.getId();
+        ProcessDefinition processDefinition1 = repositoryService.createProcessDefinitionQuery().processDefinitionId(id).list().get(0);
+        return processDefinition1.getDiagramResourceName();
+//        return repositoryService.getDeploymentResourceNames(id).get(0);
+    }
 
 
 }
