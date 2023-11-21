@@ -1,7 +1,7 @@
 var app = new Vue({
     el:"#app",
     data:{
-        tasklist:[]
+        processlist:[]
     },
     created:function () {
         //调用方法
@@ -12,7 +12,10 @@ var app = new Vue({
             axios.get('/process/getAll')
                 .then(function(result){
                     console.log(result);
-                    app.tasklist = result.data;
+                    app.processlist = result.data;
+                    for (let i = 0; i < app.processlist.length; i++) {
+                        app.processlist[i].startTime=new Date(app.processlist[i].startTime);
+                    }
                 });
         },
     }

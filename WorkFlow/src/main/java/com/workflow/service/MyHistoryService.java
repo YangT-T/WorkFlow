@@ -17,7 +17,8 @@ public class MyHistoryService {
         List<HistoricActivityInstance> list = historyService.createHistoricActivityInstanceQuery().taskAssignee(userId).list();
         List<MyTaskHistoryEntity> historyList=new ArrayList<>();
         list.forEach(e->{
-            historyList.add(new MyTaskHistoryEntity(e.getId(),e.getStartTime(),e.getEndTime(),e.getAssignee(),e.getActivityName()));
+            String description=e.getProcessDefinitionId().substring(0,e.getProcessDefinitionId().indexOf(":"))+": "+e.getActivityId();
+            historyList.add(new MyTaskHistoryEntity(e.getId(),e.getStartTime(),e.getEndTime(),e.getAssignee(),description,e.getActivityName()));
         });
         return historyList;
     }

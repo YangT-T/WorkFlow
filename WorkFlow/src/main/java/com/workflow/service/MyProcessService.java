@@ -2,6 +2,7 @@ package com.workflow.service;
 
 import com.workflow.entities.MyProcessEntity;
 import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricIdentityLink;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -65,13 +66,22 @@ public class MyProcessService {
 
             String starter= tasks.get(0).getAssignee();
 
-            String currentAssignee= tasks.get(tasks.size()-1).getAssignee();
+            HistoricTaskInstance currentTask = tasks.get(tasks.size() - 1);
+            String currentAssignee;
+            if(currentTask.getAssignee()==null){
+                List<HistoricIdentityLink> historicIdentityLinksForTask = historyService.getHistoricIdentityLinksForTask(currentTask.getId());
+                currentAssignee="group: "+historicIdentityLinksForTask.get(0).getGroupId();
+            }else{
+                currentAssignee= "user: "+currentTask.getAssignee();
+            }
+
 
             String state;
             if(process.getEndTime()==null){
-                state="unfinished";
+                state="unfinished: "+currentTask.getName();;
             }else{
                 state="finished";
+                currentAssignee="---";
             }
 
             Date startTime=process.getStartTime();

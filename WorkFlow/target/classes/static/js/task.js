@@ -13,6 +13,9 @@ var app = new Vue({
                 .then(function(result){
                     console.log(result);
                     app.tasklist = result.data;
+                    for (let i = 0; i < app.tasklist.length; i++) {
+                        app.tasklist[i].createTime=new Date(app.tasklist[i].createTime);
+                    }
                 });
         },
         completeTask:function (taskId) {

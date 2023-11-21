@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>历史</title>
+    <title>个人历史</title>
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
     <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css">
@@ -18,7 +18,7 @@
 <div id="app">
     <!-- .box-body -->
     <div class="box-header with-border">
-        <h3 class="box-title">历史</h3>
+        <h3 class="box-title">个人历史</h3>
     </div>
 
     <div class="box-body">
@@ -32,18 +32,18 @@
             <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
                 <thead>
                 <tr>
-                    <th class="sorting_asc">操作</th>
-                    <th class="sorting">完成时间</th>
-                    <th class="sorting">任务描述</th>
+                    <th class="text-center">操作</th>
+                    <th class="text-center">创建时间</th>
+                    <th class="text-center">任务描述</th>
                     <th class="text-center">状态</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="t in tasklist">
-                    <td>{{t.activityName}}--</td>
-                    <td>{{t.startTime}}-- </td>
-                    <td>{{t.description}}--</td>
-                    <td>finished</td>
+                    <td class="text-center">{{t.activityName}}</td>
+                    <td class="text-center">{{t.startTime.getFullYear()+"-"+t.startTime.getMonth()+"-"+t.startTime.getDate()}}</td>
+                    <td class="text-center">{{t.description}}</td>
+                    <td class="text-center">finished</td>
                 </tr>
 
                 </tbody>

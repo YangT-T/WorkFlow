@@ -12,5 +12,6 @@ public class MyTaskHistoryEntity {
     Date startTime;
     Date endTime;
     String assignee;
+    String description;
     String activityName;
 }

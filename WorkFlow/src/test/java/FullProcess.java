@@ -53,9 +53,6 @@ public class FullProcess {
     // 其他模块调用生成用户组关系模块
     public void step4(){
         MyIdentityService myIdentityService = new MyIdentityService();
-//        myIdentityService.createRelationship("alex","students");
-//        myIdentityService.createRelationship("bob","students");
-//        myIdentityService.createRelationship("alice","students");
         myIdentityService.createRelationship("bb","manager");
         myIdentityService.createRelationship("aa","manager");
         myIdentityService.createRelationship("yh","boss");

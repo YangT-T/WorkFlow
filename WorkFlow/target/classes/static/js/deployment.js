@@ -26,12 +26,6 @@ var app = new Vue({
         },
         lookDeployment:function(id){
             let newWindow=window.open('/bpmnPage/initial?id=\'+id','_blank')
-            // newWindow.document.write("<img src='/deployment/deploymentShowPage?id="+id+ "' style=\"width:40%;height:50%\">")
-
-            // axios.get('/deployment/deploymentShowPage?id='+id)
-            //     .then(function(result){
-            //         newWindow.document.write("<img :src=\"'/deployment/deploymentShowPage?id="+id+ "' style=\"width:40%;height:50%\">")
-                // });
         }
     }
 });

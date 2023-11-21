@@ -48,18 +48,18 @@
 			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 			                      <thead>
 			                          <tr>
-										  <th class="sorting_asc">task id</th>
-                                          <th class="sorting">startTime</th>
-									      <th class="sorting">申请内容</th>
+										  <th class="text-center">task id</th>
+                                          <th class="text-center">startTime</th>
+									      <th class="text-center">申请内容</th>
 					                      <th class="text-center">操作</th>
                                           <th class="text-center">终止任务</th>
 			                          </tr>
 			                      </thead>
 			                      <tbody>
 			                          <tr v-for="t in tasklist">
-				                          <td>{{t.name}}--</td>
-                                          <td>{{t.createTime}}-- </td>
-									      <td>{{t.description}}--</td>
+				                          <td class="text-center">{{t.name}}</td>
+                                          <td class="text-center">{{t.createTime.getFullYear()+"-"+t.createTime.getMonth()+"-"+t.createTime.getDate()}}</td>
+									      <td class="text-center">{{t.description}}</td>
 		                                  <td class="text-center">
 		                                 	  <button type="button" class="btn bg-olive btn-xs" @click="completeTask(t.id);">finish</button>
 		                                  </td>

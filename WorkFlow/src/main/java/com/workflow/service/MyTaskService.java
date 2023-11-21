@@ -3,6 +3,7 @@ package com.workflow.service;
 import com.workflow.entities.MyTaskEntity;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
@@ -40,18 +41,9 @@ public class MyTaskService {
         }
         ArrayList<MyTaskEntity> entityList=new ArrayList<>();
         taskList.forEach(e->{
-            entityList.add(new MyTaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),e.getDescription(),e.getCreateTime(),e.getDueDate()));
+            String description="Need to submit properties: "+new MyBpmnParseService().getTaskFlowProperties(e.getId());
+            entityList.add(new MyTaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),description,e.getCreateTime(),e.getDueDate()));
         });
-//        List<Group> list_g = processEngine.getIdentityService().createGroupQuery().groupMember(assigneeKey).list();
-//        System.out.println("gsize:"+list_g.size());
-//        list_g.forEach(group -> {
-//            System.out.println(group.getId());
-//            List<Task> list = processEngine.getTaskService().createTaskQuery().taskCandidateUser("bob").list();
-//            System.out.println(list.size());
-//            list.forEach(e->{
-//                entityList.add(new MyTaskEntity(e.getId(),e.getName(),e.getOwner(),e.getAssignee(),e.getDescription(),e.getCreateTime(),e.getDueDate()));
-//            });
-//        });
         System.out.println("getAll");
         return entityList;
     }
@@ -90,6 +82,11 @@ public class MyTaskService {
     public void deleteTask(String taskId){
         processEngine=ProcessEngines.getDefaultProcessEngine();
         TaskService taskService=processEngine.getTaskService();
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        Task task = taskService.createTaskQuery().taskId(taskId).list().get(0);
+        String processInstanceId = task.getProcessInstanceId();
+        runtimeService.deleteProcessInstance(processInstanceId,"deleted by: "+task.getAssignee());
+
         taskService.deleteTask(taskId);
     }
 
@@ -98,5 +95,7 @@ public class MyTaskService {
         TaskService taskService=processEngine.getTaskService();
         taskService.claim(taskId,assigneeId);
         taskService.complete(taskId,map);
+
+
     }
 }
