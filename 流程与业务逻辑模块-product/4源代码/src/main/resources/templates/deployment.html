@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>部署管理</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+	<script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+</head>
+<body class="hold-transition skin-red sidebar-mini"  >
+  <!-- .box-body -->
+                <div class="box box-primary" id="app">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">部署</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+			                  <!--数据列表-->
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+										  <th class="text-center">id</th>
+										  <th class="text-center">name</th>
+										  <th class="text-center">state</th>
+										  <th class="text-center">START</th>
+					                      <th class="text-center">preview</th>
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+
+									  <tr v-for="deployment in deploymentList">
+										  <td class="text-center">{{deployment.id}}</td>
+										  <td class="text-center">{{deployment.name}}</td>
+<!--										  <td>{{deployment.description}}</td>-->
+										  <td class="text-center">{{deployment.suspended==0?"启用":"禁用"}}</td>
+										  <td class="text-center">
+											  <button type="button" class="btn bg-olive btn-xs" @click="fillProperty(deployment.id);">创建流程实例</button>
+										  </td>
+										  <td class="text-center">
+											  <img :src="'/deployment/deploymentShowPage?id='+deployment.id" style="width:40%;height:50%">
+										  </td>
+									  </tr>
+
+			                      </tbody>
+			                  </table>
+			                  <!--数据列表/-->
+                        </div>
+                        <!-- 数据表格 /-->
+                     </div>
+                    <!-- /.box-body -->
+
+				</div>
+<!--  <img :src="'data:image/jpeg;base64,'+row.imageBlob" style="width:40%;height:50%" >-->
+
+
+</body>
+<!--vue和axios引入-->
+<script src="/js/vuejs-2.5.16.js"></script>
+<script src="/js/axios-0.18.0.js"></script>
+<script src="/js/deployment.js"></script>
+</html>

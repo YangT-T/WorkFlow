@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>表单</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+</head>
+<body class="hold-transition skin-red sidebar-mini">
+<input type="hidden" id="taskId" th:value="${taskId}">
+<div id="app">
+    <!-- .box-body -->
+    <div class="box-header with-border">
+        <h3 class="box-title">请填写表单</h3>
+    </div>
+
+    <div class="box-body">
+
+        <!-- 数据表格 -->
+        <div class="table-box">
+
+            <!--工具栏-->
+            <!--                            <div class="pull-left">-->
+            <!--                                <div class="form-group form-inline">-->
+            <!--                                    <div class="btn-group">-->
+            <!--                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ><i class="fa fa-file-o"></i> 新建</button>-->
+            <!--                                    </div>-->
+            <!--                                    <div class="btn-group">-->
+            <!--                                        <button type="button" class="btn btn-default" title="历史" @click="getHistory()" >历史</button>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <div class="box-tools pull-right">
+                <div class="has-feedback">
+
+                </div>
+            </div>
+            <!--工具栏/-->
+
+            <!--数据列表-->
+            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                <thead>
+                <tr>
+                    <th class="sorting_asc">property</th>
+                    <th class="sorting">content</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(index,t) in propertyList">
+                    <td>{{index}}</td>
+                    <td><label>
+                        <input v-model="valueList[t]">
+                    </label></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--数据列表/-->
+
+            <button type="button" class="btn bg-olive btn-xs" @click="completeTask();">完成任务</button>
+        </div>
+        <!-- 数据表格 /-->
+    </div>
+    <!-- /.box-body -->
+</div>
+</body>
+</html>
+<!--vue和axios引入-->
+<script src="/js/vuejs-2.5.16.js"></script>
+<script src="/js/axios-0.18.0.js"></script>
+<script src="/js/fill-flow-properties.js"></script>
