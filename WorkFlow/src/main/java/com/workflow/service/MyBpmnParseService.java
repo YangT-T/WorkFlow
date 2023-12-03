@@ -20,7 +20,6 @@ public class MyBpmnParseService {
         String taskDefKey=list.get(0).getTaskDefinitionKey();
         RepositoryService repositoryService = defaultProcessEngine.getRepositoryService();
         String deploymentId = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).list().get(0).getDeploymentId();
-        System.out.println("123123123123:"+taskDefKey);
         return BpmnParser.parseBpmnTaskFlow(deploymentId, taskDefKey);
     }
 

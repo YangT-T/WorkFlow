@@ -16,7 +16,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd">
         <property name="jdbcDriver" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql:///activiti?nullCatalogMeansCurrent=true"/>
         <property name="jdbcUsername" value="root"/>
-        <property name="jdbcPassword" value="12345678"/>
+        <property name="jdbcPassword" value="111111"/>
 
 <!--        <property name="activiti5CompatibilityEnabled" value="true" />-->
 <!--        <property name="activiti5CompatibilityHandlerFactory" ref="activiti5CompabilityFactory" />-->
